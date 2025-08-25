@@ -1,15 +1,27 @@
-import React from "react";
-///import Login from "./login";  // importa o componente Login
-import "./App.css";           // mantém o estilo padrão se quiser
-import Estados from "./components/estado";
+import React, { useState } from "react";
+import Login from "./login";
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
 
 
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+  
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+  
   return (
     <div className="App">
-      <Estados/>
+      {isLoggedIn ? 
+        <Dashboard onLogout={handleLogout} /> : 
+        <Login onLoginSuccess={handleLoginSuccess} />}
     </div>
   );
 }
