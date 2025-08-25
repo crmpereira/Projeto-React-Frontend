@@ -29,7 +29,7 @@ import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { alpha } from "@mui/material/styles";
 
-import GenericDataGrid from "../components/genericdatagrid";
+import GenericDataGrid from "./genericdatagrid";
 
 const Estados = () => {
   const [estados, setEstados] = useState([]);

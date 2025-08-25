@@ -47,6 +47,10 @@ export default function Login({ onLoginSuccess }) {
       // Simulando um atraso para demonstrar o loading
       await new Promise(resolve => setTimeout(resolve, 1000));
       
+      // Modo demonstração - aceita qualquer email e senha
+      // Para usar com backend real, descomente o código abaixo e comente esta seção
+      
+      /*
       const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -60,6 +64,9 @@ export default function Login({ onLoginSuccess }) {
       }
 
       await response.json(); // Recebe os dados do servidor
+      */
+      
+      // Simulação de login bem-sucedido (modo demonstração)
       setSnackbar({
         open: true,
         message: "Login realizado com sucesso!",

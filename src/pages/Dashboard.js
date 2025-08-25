@@ -32,6 +32,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Estados from '../components/estado';
+import Clientes from '../components/cliente';
 
 const drawerWidth = 240;
 
@@ -64,6 +65,7 @@ export default function Dashboard({ onLogout }) {
   const menuItems = [
     { id: 'dashboard', text: 'Dashboard', icon: <DashboardIcon /> },
     { id: 'estados', text: 'Estados', icon: <PublicIcon /> },
+    { id: 'clientes', text: 'Clientes', icon: <PeopleIcon /> },
     { id: 'usuarios', text: 'Usuários', icon: <PeopleIcon /> },
     { id: 'relatorios', text: 'Relatórios', icon: <BarChartIcon /> },
     { id: 'configuracoes', text: 'Configurações', icon: <SettingsIcon /> },
@@ -80,7 +82,7 @@ export default function Dashboard({ onLogout }) {
               </Typography>
               <Grid container spacing={3}>
                 {/* Card de Estatísticas 1 */}
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={3}>
                   <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
                     <CardHeader
                       title="Estados Cadastrados"
@@ -100,10 +102,10 @@ export default function Dashboard({ onLogout }) {
                   </Card>
                 </Grid>
                 {/* Card de Estatísticas 2 */}
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={3}>
                   <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
                     <CardHeader
-                      title="Usuários Ativos"
+                      title="Clientes Cadastrados"
                       titleTypographyProps={{ variant: 'h6' }}
                       sx={{
                         background: `linear-gradient(45deg, ${theme.palette.secondary.main} 30%, ${theme.palette.secondary.dark} 90%)`,
@@ -113,14 +115,34 @@ export default function Dashboard({ onLogout }) {
                     <CardContent>
                       <Box display="flex" alignItems="center" justifyContent="center">
                         <Typography variant="h3" color="secondary" sx={{ fontWeight: 'bold' }}>
-                          15
+                          8
                         </Typography>
                       </Box>
                     </CardContent>
                   </Card>
                 </Grid>
                 {/* Card de Estatísticas 3 */}
-                <Grid item xs={12} md={4}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
+                    <CardHeader
+                      title="Usuários Ativos"
+                      titleTypographyProps={{ variant: 'h6' }}
+                      sx={{
+                        background: 'linear-gradient(45deg, #4CAF50 30%, #45A049 90%)',
+                        color: 'white',
+                      }}
+                    />
+                    <CardContent>
+                      <Box display="flex" alignItems="center" justifyContent="center">
+                        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#4CAF50' }}>
+                          15
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                {/* Card de Estatísticas 4 */}
+                <Grid item xs={12} sm={6} md={3}>
                   <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
                     <CardHeader
                       title="Acessos Hoje"
@@ -147,21 +169,23 @@ export default function Dashboard({ onLogout }) {
                     </Typography>
                     <Divider sx={{ mb: 2 }} />
                     <Box sx={{ p: 1 }}>
-                      {[1, 2, 3].map((item) => (
+                      {[1, 2, 3, 4].map((item) => (
                         <Box key={item} sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                           <Avatar sx={{ mr: 2, bgcolor: theme.palette.primary.main }}>
                             {item}
                           </Avatar>
                           <Box>
                             <Typography variant="body1" sx={{ fontWeight: 'medium' }}>
-                              {item === 1 ? 'Estado de São Paulo atualizado' : 
-                               item === 2 ? 'Novo usuário cadastrado' : 
-                               'Relatório mensal gerado'}
+                              {item === 1 ? 'Novo cliente João Silva cadastrado' : 
+                               item === 2 ? 'Cliente Maria Santos atualizado' :
+                               item === 3 ? 'Estado de São Paulo atualizado' : 
+                               'Novo usuário cadastrado'}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                              {item === 1 ? 'Há 2 horas' : 
-                               item === 2 ? 'Há 5 horas' : 
-                               'Há 1 dia'}
+                              {item === 1 ? 'Há 30 minutos' : 
+                               item === 2 ? 'Há 1 hora' :
+                               item === 3 ? 'Há 2 horas' : 
+                               'Há 4 horas'}
                             </Typography>
                           </Box>
                         </Box>
@@ -175,6 +199,8 @@ export default function Dashboard({ onLogout }) {
         );
       case 'estados':
         return <Estados />;
+      case 'clientes':
+        return <Clientes />;
       default:
         return (
           <Box sx={{ p: 3, textAlign: 'center' }}>
