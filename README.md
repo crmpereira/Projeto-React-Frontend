@@ -15,6 +15,7 @@ Este projeto é uma aplicação frontend desenvolvida em React que implementa um
 - Material-UI
 - React Router
 - Axios para requisições HTTP
+- Storybook (para documentação de componentes)
 
 ## Pré-requisitos
 - Node.js (versão 14 ou superior)
@@ -59,6 +60,32 @@ yarn start
 
 A aplicação estará disponível em `http://localhost:3000`.
 
+## Documentação de Componentes
+
+Este projeto utiliza o Storybook para documentação interativa dos componentes.
+
+### Executando o Storybook
+
+Para iniciar o Storybook:
+```
+npm run storybook
+```
+
+O Storybook estará disponível em `http://localhost:6006`.
+
+### O que você encontrará no Storybook
+
+- **Design System**: Paleta de cores, tipografia e tema do projeto
+- **Componentes**: Documentação interativa de todos os componentes
+- **Stories**: Diferentes variações e estados dos componentes
+- **Guias**: Documentação de uso e boas práticas
+
+### Componentes Documentados
+
+- **GenericDataGrid**: Componente base para exibição de dados tabulares
+- **Theme**: Sistema de design e paleta de cores
+- **Formulários**: Padrões de formulários utilizados no sistema
+
 ## Uso
 
 1. Acesse a página de login em `http://localhost:3000`
@@ -72,6 +99,8 @@ A aplicação estará disponível em `http://localhost:3000`.
 - `src/login.js` - Componente de login com validação
 - `src/pages/Dashboard.js` - Dashboard administrativo com menu e estatísticas
 - `src/components/` - Componentes reutilizáveis
+- `src/stories/` - Documentação Storybook dos componentes
+- `.storybook/` - Configurações do Storybook
 
 ## Contribuição
 
