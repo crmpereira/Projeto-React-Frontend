@@ -6,17 +6,26 @@ import {
   Button,
   TextField,
   Stack,
-  Paper,
+  Modal,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+
+import GenericDataGrid from "../components/genericdatagrid";
 
 const Estados = () => {
   const [estados, setEstados] = useState([]);
   const [form, setForm] = useState({ id_estado: null, nome: "", uf: "" });
   const [editando, setEditando] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     carregarEstados();
@@ -36,30 +45,31 @@ const Estados = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    if (editando) {
-      await axios.put(`http://localhost:5000/estados/${form.id_estado}`, form);
-    } else {
-      await axios.post("http://localhost:5000/estados", form);
+    e.preventDefault();
+    try {
+      if (editando) {
+        await axios.put(`http://localhost:5000/estados/${form.id_estado}`, form);
+      } else {
+        await axios.post("http://localhost:5000/estados", form);
+      }
+      resetForm();
+      carregarEstados();
+      setOpenModal(false);
+    } catch (error) {
+      console.error("Erro ao salvar:", error.response?.data || error.message);
     }
-    resetForm();
-    carregarEstados();
-  } catch (error) {
-    console.error("Erro ao salvar:", error);
-  }
-};
-
+  };
 
   const handleEdit = (estado) => {
     setForm(estado);
     setEditando(true);
+    setOpenModal(true);
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("Deseja realmente excluir?")) {
       try {
-        await axios.delete(`http://localhost:3000/estados/${id}`);
+        await axios.delete(`http://localhost:5000/estados/${id}`);
         carregarEstados();
       } catch (err) {
         console.error("Erro ao excluir estado:", err);
@@ -83,98 +93,96 @@ const Estados = () => {
       sortable: false,
       renderCell: (params) => (
         <Stack direction="row" spacing={1}>
-          <Button
-            size="small"
-            variant="contained"
-            color="warning"
-            onClick={() => handleEdit(params.row)}
-          >
-            <EditIcon fontSize="small" />
-          </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="error"
-            onClick={() => handleDelete(params.row.id_estado)}
-          >
-            <DeleteIcon fontSize="small" />
-          </Button>
+          <Tooltip title="Editar">
+            <IconButton color="warning" onClick={() => handleEdit(params.row)}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Excluir">
+            <IconButton color="error" onClick={() => handleDelete(params.row.id_estado)}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
         </Stack>
       ),
     },
   ];
 
   return (
-    <Container maxWidth="md" sx={{ mt: 5 }}>
-      <Typography variant="h4" component="h2" gutterBottom align="center">
-        Gestão de Estados
+    <Container maxWidth="md" sx={{ mt: 5, px: isMobile ? 2 : 0 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        Manutenção dos Estados
       </Typography>
 
-      {/* Formulário */}
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 2,
-          mb: 3,
-          alignItems: "center",
-        }}
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ mb: 2 }}
+        onClick={() => setOpenModal(true)}
       >
-        <TextField
-          label="Nome"
-          name="nome"
-          value={form.nome}
-          onChange={handleChange}
-          required
-          inputProps={{ maxLength: 50 }}
-          fullWidth
-        />
-        <TextField
-          label="UF"
-          name="uf"
-          value={form.uf}
-          onChange={handleChange}
-          required
-          inputProps={{ maxLength: 2, style: { textTransform: "uppercase" } }}
-          sx={{ width: 100 }}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          {editando ? "Atualizar" : "Adicionar"}
-        </Button>
-        {editando && (
-          <Button variant="outlined" color="secondary" onClick={resetForm}>
-            Cancelar
-          </Button>
-        )}
-      </Box>
+        Adicionar Estado
+      </Button>
 
-      {/* Grid estilizada */}
-      <Paper sx={{ height: 400, width: "100%", p: 1 }}>
-        <DataGrid
-          rows={estados}
-          columns={columns}
-          getRowId={(row) => row.id_estado}
-          pageSize={5}
-          rowsPerPageOptions={[5, 10, 20]}
-          disableRowSelectionOnClick
-          components={{ Toolbar: GridToolbar }}
+      {/* Modal Form */}
+      <Modal open={openModal} onClose={() => { setOpenModal(false); resetForm(); }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
           sx={{
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "#1976d2",
-              color: "#fff",
-              fontWeight: "bold",
-            },
-            "& .MuiDataGrid-row:nth-of-type(odd)": {
-              backgroundColor: "#f5f5f5",
-            },
-            "& .MuiDataGrid-cell": {
-              fontSize: 14,
-            },
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: isMobile ? "90%" : 400,
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 4,
           }}
-        />
-      </Paper>
+        >
+          <Typography variant="h6" gutterBottom>
+            {editando ? "Editar Estado" : "Adicionar Estado"}
+          </Typography>
+          <TextField
+            label="Nome"
+            name="nome"
+            value={form.nome}
+            onChange={handleChange}
+            required
+            fullWidth
+            sx={{ mb: 2 }}
+          />
+          <TextField
+            label="UF"
+            name="uf"
+            value={form.uf}
+            onChange={handleChange}
+            required
+            inputProps={{ maxLength: 2, style: { textTransform: "uppercase" } }}
+            sx={{ mb: 2, width: isMobile ? "100%" : 100 }}
+          />
+          <Stack
+            direction={isMobile ? "column" : "row"}
+            spacing={2}
+            justifyContent="flex-end"
+          >
+            <Button variant="outlined" onClick={() => { setOpenModal(false); resetForm(); }}>
+              Cancelar
+            </Button>
+            <Button type="submit" variant="contained" color="primary">
+              {editando ? "Atualizar" : "Adicionar"}
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
+
+      {/* Grid Genérica */}
+      <GenericDataGrid
+        rows={estados}
+        columns={columns}
+        getRowId={(row) => row.id_estado} // garante IDs únicos
+        highlightRow={(row) => row.uf === "SC"} // opcional
+      />
     </Container>
   );
 };
