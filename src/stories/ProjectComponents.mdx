@@ -1,0 +1,78 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentação/Componentes do Projeto" />
+
+# Componentes do Projeto React
+
+Este projeto contém vários componentes React para gerenciamento de dados empresariais.
+
+## Componentes Principais
+
+### GenericDataGrid
+Um componente reutilizável baseado no Material-UI DataGrid para exibição de dados tabulares.
+
+**Características:**
+- Paginação configurável (5, 10, 20 itens por página)
+- Estado de carregamento
+- Colunas personalizáveis
+- Filtros e ordenação automática
+- Design responsivo
+
+**Props:**
+- `rows`: Array de dados para exibir
+- `columns`: Configuração das colunas
+- `pageSize`: Número de itens por página (padrão: 5)
+- `getRowId`: Função para obter ID único da linha
+- `loading`: Estado de carregamento (padrão: false)
+
+### Outros Componentes
+
+O projeto também inclui componentes específicos para:
+
+- **Cliente**: Gerenciamento de clientes
+- **Produto**: Gerenciamento de produtos
+- **Pedido**: Gerenciamento de pedidos
+- **Estado**: Gerenciamento de estados
+- **Relatórios**: Geração de relatórios
+
+## Como Usar
+
+1. Importe o componente necessário
+2. Configure as props apropriadas
+3. Passe os dados e configurações de coluna
+
+```jsx
+import GenericDataGrid from './components/genericdatagrid';
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'nome', headerName: 'Nome', width: 150 },
+];
+
+const rows = [
+  { id: 1, nome: 'Exemplo' },
+];
+
+<GenericDataGrid 
+  rows={rows} 
+  columns={columns} 
+  pageSize={10} 
+/>
+```
+
+## Tecnologias Utilizadas
+
+- React 18
+- Material-UI (MUI)
+- DataGrid
+- Axios para requisições HTTP
+
+## Estrutura do Projeto
+
+```
+src/
+├── components/     # Componentes reutilizáveis
+├── pages/         # Páginas da aplicação
+├── services/      # Serviços de API
+└── stories/       # Documentação Storybook
+```

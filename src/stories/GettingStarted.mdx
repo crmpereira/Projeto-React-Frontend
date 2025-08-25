@@ -1,0 +1,118 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Documentação/Guia de Início" />
+
+# 🚀 Guia de Início Rápido - Storybook
+
+Bem-vindo à documentação do Sistema de Gestão! Este Storybook contém a documentação interativa de todos os componentes do projeto.
+
+## 📋 O que você encontrará aqui
+
+### 🎨 Design System
+- **Theme**: Paleta de cores, tipografia e estilos do projeto
+- **Componentes**: Documentação de todos os componentes reutilizáveis
+
+### 🧩 Componentes Principais
+
+#### GenericDataGrid
+Componente base para exibição de dados tabulares usado em todo o sistema.
+
+**Funcionalidades:**
+- Paginação automática
+- Filtros e ordenação
+- Estados de carregamento
+- Design responsivo
+
+#### Formulários
+Todos os formulários do sistema seguem o mesmo padrão de design e UX.
+
+**Características:**
+- Validação em tempo real
+- Feedback visual
+- Responsividade
+- Acessibilidade
+
+## 🛠️ Como usar este Storybook
+
+### 1. Navegação
+Use o menu lateral para navegar entre:
+- **Documentação**: Guias e informações gerais
+- **Design System**: Cores, tipografia e tema
+- **Components**: Componentes individuais
+
+### 2. Testando Componentes
+Cada componente possui:
+- **Canvas**: Visualização interativa
+- **Docs**: Documentação automática
+- **Controls**: Controles para testar diferentes props
+
+### 3. Variações (Stories)
+Cada componente tem múltiplas "stories" que mostram:
+- Estado padrão
+- Estados de erro
+- Diferentes tamanhos
+- Casos de uso específicos
+
+## 🔧 Comandos Úteis
+
+```bash
+# Iniciar o Storybook
+npm run storybook
+
+# Construir o Storybook para produção
+npm run build-storybook
+
+# Iniciar a aplicação principal
+npm start
+```
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── cliente.js      # Gerenciamento de clientes
+│   ├── produto.js      # Gerenciamento de produtos
+│   ├── pedido.js       # Gerenciamento de pedidos
+│   ├── estado.js       # Gerenciamento de estados
+│   ├── relatorios.js   # Geração de relatórios
+│   └── genericdatagrid.js # Grid genérico
+├── pages/              # Páginas da aplicação
+│   └── Dashboard.js    # Dashboard principal
+├── stories/            # Stories do Storybook
+├── services/           # Serviços de API
+└── theme.js           # Tema personalizado
+```
+
+## 🎯 Boas Práticas
+
+### Para Desenvolvedores
+1. **Sempre teste componentes no Storybook** antes de integrar
+2. **Documente novos componentes** criando stories
+3. **Use o tema consistentemente** em todos os componentes
+4. **Teste diferentes estados** (loading, error, empty)
+
+### Para Designers
+1. **Use o Design System** como referência
+2. **Verifique a consistência** visual entre componentes
+3. **Teste a responsividade** em diferentes tamanhos
+4. **Valide a acessibilidade** dos componentes
+
+## 🔗 Links Úteis
+
+- [Documentação do Storybook](https://storybook.js.org/docs)
+- [Material-UI Documentation](https://mui.com/)
+- [React Documentation](https://react.dev/)
+
+## 🆘 Precisa de Ajuda?
+
+Se você encontrar problemas ou tiver dúvidas:
+
+1. Verifique a documentação dos componentes
+2. Teste diferentes variações nas stories
+3. Consulte o código fonte dos componentes
+4. Entre em contato com a equipe de desenvolvimento
+
+---
+
+**Dica:** Use os controles interativos para experimentar diferentes configurações dos componentes em tempo real!

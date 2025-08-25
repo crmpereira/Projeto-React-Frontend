@@ -31,8 +31,13 @@ import PublicIcon from '@mui/icons-material/Public';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Estados from '../components/estado';
 import Clientes from '../components/cliente';
+import Produtos from '../components/produto';
+import Pedidos from '../components/pedido';
+import Relatorios from '../components/relatorios';
 
 const drawerWidth = 240;
 
@@ -66,6 +71,8 @@ export default function Dashboard({ onLogout }) {
     { id: 'dashboard', text: 'Dashboard', icon: <DashboardIcon /> },
     { id: 'estados', text: 'Estados', icon: <PublicIcon /> },
     { id: 'clientes', text: 'Clientes', icon: <PeopleIcon /> },
+    { id: 'produtos', text: 'Produtos', icon: <InventoryIcon /> },
+    { id: 'pedidos', text: 'Pedidos', icon: <ShoppingCartIcon /> },
     { id: 'usuarios', text: 'Usuários', icon: <PeopleIcon /> },
     { id: 'relatorios', text: 'Relatórios', icon: <BarChartIcon /> },
     { id: 'configuracoes', text: 'Configurações', icon: <SettingsIcon /> },
@@ -121,20 +128,40 @@ export default function Dashboard({ onLogout }) {
                     </CardContent>
                   </Card>
                 </Grid>
-                {/* Card de Estatísticas 3 */}
+                {/* Card de Estatísticas - Produtos */}
                 <Grid item xs={12} sm={6} md={3}>
                   <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
                     <CardHeader
-                      title="Usuários Ativos"
+                      title="Produtos Cadastrados"
                       titleTypographyProps={{ variant: 'h6' }}
                       sx={{
-                        background: 'linear-gradient(45deg, #4CAF50 30%, #45A049 90%)',
+                        background: 'linear-gradient(45deg, #FF9800 30%, #F57C00 90%)',
                         color: 'white',
                       }}
                     />
                     <CardContent>
                       <Box display="flex" alignItems="center" justifyContent="center">
-                        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#4CAF50' }}>
+                        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#FF9800' }}>
+                          25
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                {/* Card de Estatísticas - Pedidos */}
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card elevation={2} sx={{ borderRadius: 2, height: '100%' }}>
+                    <CardHeader
+                      title="Pedidos Realizados"
+                      titleTypographyProps={{ variant: 'h6' }}
+                      sx={{
+                        background: 'linear-gradient(45deg, #9C27B0 30%, #7B1FA2 90%)',
+                        color: 'white',
+                      }}
+                    />
+                    <CardContent>
+                      <Box display="flex" alignItems="center" justifyContent="center">
+                        <Typography variant="h3" sx={{ fontWeight: 'bold', color: '#9C27B0' }}>
                           15
                         </Typography>
                       </Box>
@@ -201,6 +228,12 @@ export default function Dashboard({ onLogout }) {
         return <Estados />;
       case 'clientes':
         return <Clientes />;
+      case 'produtos':
+        return <Produtos />;
+      case 'pedidos':
+        return <Pedidos />;
+      case 'relatorios':
+        return <Relatorios />;
       default:
         return (
           <Box sx={{ p: 3, textAlign: 'center' }}>
