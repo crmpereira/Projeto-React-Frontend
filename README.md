@@ -20,6 +20,7 @@ Este projeto é uma aplicação frontend desenvolvida em React que implementa um
 ## Pré-requisitos
 - Node.js (versão 14 ou superior)
 - NPM ou Yarn
+- PostgreSQL (versão 12 ou superior)
 - Backend rodando na porta 5000 (para autenticação)
 
 ## Instalação
@@ -44,6 +45,32 @@ yarn install
 ```
 
 ## Configuração
+
+### Banco de Dados PostgreSQL
+
+Este projeto utiliza PostgreSQL como banco de dados. Certifique-se de ter o PostgreSQL instalado e configurado:
+
+1. **Instale o PostgreSQL**:
+   - Download: https://www.postgresql.org/download/
+   - Versão recomendada: 12 ou superior
+
+2. **Configure o banco de dados**:
+   ```sql
+   CREATE DATABASE projeto_react_db;
+   CREATE USER projeto_user WITH PASSWORD 'sua_senha';
+   GRANT ALL PRIVILEGES ON DATABASE projeto_react_db TO projeto_user;
+   ```
+
+3. **Variáveis de ambiente** (no backend):
+   ```
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_NAME=projeto_react_db
+   DB_USER=projeto_user
+   DB_PASSWORD=sua_senha
+   ```
+
+### Backend
 
 Certifique-se de que o backend esteja rodando na porta 5000 para que a autenticação funcione corretamente. A aplicação está configurada para se conectar a `http://localhost:5000/api/login` para autenticação.
 
@@ -110,6 +137,3 @@ O Storybook estará disponível em `http://localhost:6006`.
 4. Faça push para a branch (`git push origin feature/nova-feature`)
 5. Abra um Pull Request
 
-## Licença
-
-Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
